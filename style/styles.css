@@ -83,3 +83,9 @@ h2 {
   font-size: 12px;
   font-weight: 600;
 }
+
+.github {
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
