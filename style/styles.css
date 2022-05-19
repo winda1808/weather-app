@@ -24,16 +24,17 @@ h3 {
   margin-top: 0px;
 }
 
+h2 {
+  font-family: "Josefin Sans", sans-serif;
+  margin-top: 0px;
+  font-weight: 400px;
+}
 .main {
-  font-size: 95px;
+  font-size: 80px;
   position: absolute;
   top: 3%;
-  left: 5%;
+  left: 1%;
   font-weight: bolder;
-}
-
-h2 {
-  font-weight: semibold;
 }
 
 .temper {
@@ -82,10 +83,4 @@ h2 {
 .col {
   font-size: 12px;
   font-weight: 600;
-}
-
-.github {
-  margin: 0 auto;
-  display: block;
-  text-align: center;
 }
