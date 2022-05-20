@@ -13,11 +13,16 @@ form.addEventListener("submit", cityName);
 
 function showTemperature(response) {
   let temp = Math.round(response.data.main.temp);
-  let desc = response.data.weather[0].description;
   let descriptionElement = document.querySelector("#description");
+  let wind = response.data.wind.speed;
+  let windSpeed = document.querySelector("#wind");
+  let humid = response.data.main.humidity;
+  let humidityElement = document.querySelector("#humidity");
   let h1 = document.querySelector("#main-temp");
   h1.innerHTML = `${temp} °C`.toLocaleUpperCase().trim();
-  descriptionElement.innerHTML = `${desc}`;
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  windSpeed.innerHTML = `Wind: ${wind} km/h`;
+  humidityElement.innerHTML = `Humidity ${humid} %`;
 }
 
 let now = new Date();
