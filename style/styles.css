@@ -124,6 +124,7 @@ h2 {
 }
 
 .forecast {
+  margin-top: 2%;
   text-align: center;
   font-size: medium;
   font-weight: bold;
