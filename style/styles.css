@@ -32,7 +32,7 @@ h2 {
   font-size: 80px;
   position: absolute;
   top: 3%;
-  left: 1%;
+  left: 12%;
   font-weight: bolder;
 }
 
@@ -83,4 +83,10 @@ h2 {
   font-size: 17px;
   font-weight: 500px;
   font-family: "Josefin Sans", sans-serif;
+}
+
+.units {
+  font-size: 30px;
+  top: 3%;
+  font-weight: bolder;
 }

@@ -27,7 +27,6 @@ function formatDate(timestamp) {
 }
 
 function showTemperature(response) {
-  let temp = Math.round(response.data.main.temp);
   let descriptionElement = document.querySelector("#description");
   let wind = Math.round(response.data.wind.speed);
   let windSpeed = document.querySelector("#wind");
@@ -35,7 +34,9 @@ function showTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let currentDate = document.querySelector("#date");
   let h1 = document.querySelector("#main-temp");
-  h1.innerHTML = `${temp} °C`.toLocaleUpperCase().trim();
+
+  celciusTemp = response.data.main.temp;
+  h1.innerHTML = Math.round(celciusTemp);
   descriptionElement.innerHTML = response.data.weather[0].description;
   windSpeed.innerHTML = `Wind: ${wind} km/h`;
   humidityElement.innerHTML = `Humidity ${humid} %`;
@@ -44,11 +45,17 @@ function showTemperature(response) {
 
 //convertion
 
-//function cToF(event) {
-//event.preventDefault();
-//let h1 = document.querySelector(".main");
-//h1.innerHTML = 31 * 2 + 30 + "°" + "F";
-//}
+function convertFahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemp = (celciusTemp * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#main-temp");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+}
+
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", convertFahrenheit);
+
+let celciusTemp = null;
 
 //let convert = document.querySelector("#main-temp");
 //convert.addEventListener("click", cToF);
