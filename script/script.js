@@ -34,13 +34,32 @@ function showTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let currentDate = document.querySelector("#date");
   let h1 = document.querySelector("#main-temp");
-
   celciusTemp = response.data.main.temp;
   h1.innerHTML = Math.round(celciusTemp);
   descriptionElement.innerHTML = response.data.weather[0].description;
   windSpeed.innerHTML = `Wind: ${wind} km/h`;
   humidityElement.innerHTML = `Humidity ${humid} %`;
   currentDate.innerHTML = formatDate(response.data.dt * 1000);
+
+  let iconElement = document.querySelector("#weather-icon");
+  let weather = response.data.weather[0].main;
+  if (weather == "Clouds") {
+    iconElement.setAttribute("src", `img/cloudy.png`);
+  }
+  if (weather == "Rain") {
+    iconElement.setAttribute("src", `img/rain.png`);
+  }
+
+  if (weather == "Drizzle") {
+    iconElement.setAttribute("src", `img/rain.png`);
+  }
+
+  if (weather == "Clear") {
+    iconElement.setAttribute("src", `img/sunny.png`);
+  }
+  if (weather == "Thunderstorm") {
+    iconElement.setAttribute("src", `img/thunder.png`);
+  }
 }
 
 //convertion
