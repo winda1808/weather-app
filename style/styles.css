@@ -89,4 +89,29 @@ h2 {
   font-size: 30px;
   top: 3%;
   font-weight: bolder;
+  color: #bdc2e8;
+}
+
+.active {
+  color: #707ac7;
+  cursor: default;
+  text-decoration: none;
+}
+
+.active:hover {
+  color: #707ac7;
+  cursor: default;
+  text-decoration: none;
+}
+
+.passive {
+  color: #bdc2e8;
+  cursor: default;
+  text-decoration: none;
+}
+
+.passive:hover {
+  color: #bdc2e8;
+  cursor: default;
+  text-decoration: none;
 }
