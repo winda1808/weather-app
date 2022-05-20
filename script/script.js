@@ -13,8 +13,11 @@ form.addEventListener("submit", cityName);
 
 function showTemperature(response) {
   let temp = Math.round(response.data.main.temp);
-  let shownTemp = document.querySelector("#main-temp");
-  shownTemp.innerHTML = `${temp} °C`.toLocaleUpperCase().trim();
+  let desc = response.data.weather[0].description;
+  let descriptionElement = document.querySelector("#description");
+  let h1 = document.querySelector("#main-temp");
+  h1.innerHTML = `${temp} °C`.toLocaleUpperCase().trim();
+  descriptionElement.innerHTML = `${desc}`;
 }
 
 let now = new Date();
