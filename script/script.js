@@ -1,5 +1,6 @@
 function cityName(event) {
   event.preventDefault();
+
   let searchCity = document.querySelector("#search-city");
   let h2 = document.querySelector("h2");
   h2.innerHTML = `${searchCity.value}`.toLocaleUpperCase().trim();

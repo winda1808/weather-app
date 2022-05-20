@@ -121,3 +121,9 @@ h2 {
   display: block;
   text-align: center;
 }
+
+.forecast {
+  text-align: center;
+  font-size: medium;
+  font-weight: bold;
+}
