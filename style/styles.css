@@ -10,13 +10,12 @@ h3,
 
 .other {
   font-size: 12px;
-  margin-top: 5px;
-  margin-left: 0;
+  margin: 0 auto;
 }
 
-h3 {
-  font-size: 15px;
-  margin-top: 5px;
+.date {
+  font-size: 12px;
+  margin-top: 1px;
   margin-left: 0;
 }
 
