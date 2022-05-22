@@ -61,6 +61,24 @@ function showTemperature(response) {
   if (weather == "Thunderstorm") {
     iconElement.setAttribute("src", `img/thunder.png`);
   }
+  if (weather == "Snow") {
+    iconElement.setAttribute("src", `img/snow.png`);
+  }
+
+  let misty = [
+    "Mist",
+    "Smoke",
+    "Haze",
+    "Dust",
+    "Fog",
+    "Sand",
+    "Dust",
+    "Ash",
+    "Squall",
+    "Tornado",
+  ];
+  if (weather == misty) {
+    iconElement.setAttribute("src", `img/mist.png`);
 }
 
 //convertion
