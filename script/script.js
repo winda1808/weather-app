@@ -2,11 +2,11 @@ function cityName(event) {
   event.preventDefault();
 
   let searchCity = document.querySelector("#search-city");
-  let h2 = document.querySelector("h2");
-  h2.innerHTML = `${searchCity.value}`.toLocaleUpperCase().trim();
   let apiKey = "ae7a846b3048f734526a71e1a47e2b4b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity.value}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
+  let h2 = document.querySelector("h2");
+  h2.innerHTML = `${searchCity.value}`.toLocaleUpperCase().trim();
 }
 
 let form = document.querySelector("#search-form");
@@ -25,6 +25,33 @@ function formatDate(timestamp) {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let day = days[date.getDay()];
   return `Last updated: ${day} ${hours}:${minutes}`;
+}
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col">
+          <div class="date">${day}</div>
+          <div>
+            <br />
+            <img src="img/rain.png" width="30px" />
+          </div>
+          <br />
+          <div>
+            <span class="weather-max"> 31° </span>
+            <span class="weather-min"> 25° </span>
+          </div>
+        </div>
+        </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
 function showTemperature(response) {
@@ -79,6 +106,7 @@ function showTemperature(response) {
   ];
   if (weather == misty) {
     iconElement.setAttribute("src", `img/mist.png`);
+  }
 }
 
 //convertion
@@ -111,3 +139,5 @@ function convertCelcius(event) {
 
 let celcius = document.querySelector("#celcius");
 celcius.addEventListener("click", convertCelcius);
+
+displayForecast();
