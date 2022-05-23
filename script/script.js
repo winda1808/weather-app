@@ -7,6 +7,7 @@ function cityName(event) {
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
   let h2 = document.querySelector("h2");
   h2.innerHTML = `${searchCity.value}`.toLocaleUpperCase().trim();
+  searchCity(searchCity.value);
 }
 
 let form = document.querySelector("#search-form");
@@ -131,3 +132,5 @@ let celcius = document.querySelector("#celcius");
 celcius.addEventListener("click", convertCelcius);
 
 displayForecast();
+
+searchCity("Balikpapan");
