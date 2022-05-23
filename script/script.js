@@ -28,6 +28,21 @@ function formatDate(timestamp) {
   return `Last updated: ${day} ${hours}:${minutes}`;
 }
 
+//check if hours 18
+
+function bgColor(event) {
+  event.preventDefault();
+  let ColorElement = document.querySelector("#bg-color");
+  let hours = date.getHours();
+  if (hours < 18) {
+    ColorElement.classList.add("afternoon");
+    ColorElement.classList.remove("evening");
+  }
+  if (hours >= 18) {
+    ColorElement.classList.add("evening");
+    ColorElement.classList.remove("afternoon");
+  }
+}
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
 
@@ -132,5 +147,3 @@ let celcius = document.querySelector("#celcius");
 celcius.addEventListener("click", convertCelcius);
 
 displayForecast();
-
-searchCity("Balikpapan");
