@@ -46,7 +46,6 @@ function displayForecast() {
             <span class="weather-max"> 31° </span>
             <span class="weather-min"> 25° </span>
           </div>
-        </div>
         </div>`;
   });
 
@@ -70,7 +69,14 @@ function showTemperature(response) {
   currentDate.innerHTML = formatDate(response.data.dt * 1000);
 
   let iconElement = document.querySelector("#weather-icon");
+
+  let iconCode = response.data.weather[0].icon;
+  if ((iconCode = "50d")) {
+    iconElement.setAttribute("src", `img/mist.png`);
+  }
+
   let weather = response.data.weather[0].main;
+
   if (weather == "Clouds") {
     iconElement.setAttribute("src", `img/cloudy.png`);
   }
@@ -90,22 +96,6 @@ function showTemperature(response) {
   }
   if (weather == "Snow") {
     iconElement.setAttribute("src", `img/snow.png`);
-  }
-
-  let misty = [
-    "Mist",
-    "Smoke",
-    "Haze",
-    "Dust",
-    "Fog",
-    "Sand",
-    "Dust",
-    "Ash",
-    "Squall",
-    "Tornado",
-  ];
-  if (weather == misty) {
-    iconElement.setAttribute("src", `img/mist.png`);
   }
 }
 
