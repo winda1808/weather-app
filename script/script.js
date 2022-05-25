@@ -1,14 +1,19 @@
 function cityName(event) {
   event.preventDefault();
-
-  let searchCity = document.querySelector("#search-city");
+  let city = document.querySelector("#search-city");
   let apiKey = "ae7a846b3048f734526a71e1a47e2b4b";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCity.value}&units=metric`;
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
-  let h2 = document.querySelector("h2");
-  h2.innerHTML = `${searchCity.value}`.toLocaleUpperCase().trim();
-  searchCity(searchCity.value);
+  searchCity(city.value);
 }
+
+function searchCity(city) {
+  let apiKey = "ae7a846b3048f734526a71e1a47e2b4b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
+}
+
+searchCity("Balikpapan");
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", cityName);
@@ -77,6 +82,9 @@ function showTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let currentDate = document.querySelector("#date");
   let h1 = document.querySelector("#main-temp");
+  let h2 = document.querySelector("h2");
+  let cityName = response.data.name;
+  h2.innerHTML = `${cityName}`.toLocaleUpperCase().trim();
   celciusTemp = response.data.main.temp;
   h1.innerHTML = Math.round(celciusTemp);
   descriptionElement.innerHTML = response.data.weather[0].description;
