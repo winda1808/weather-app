@@ -24,21 +24,25 @@ function formatDate(timestamp) {
   if (hours < 10) {
     hours = `0${hours}`;
   }
+
   let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let day = days[date.getDay()];
 
-  let ColorElement = document.querySelector("#bg-color");
-  if (hours < 18) {
-    ColorElement.classList.add("afternoon");
-    ColorElement.classList.remove("evening");
-  }
+  let colorElement = document.querySelector("#bg-color");
+
   if (hours >= 18) {
-    ColorElement.classList.add("evening");
-    ColorElement.classList.remove("afternoon");
+    colorElement.classList.add("evening");
+    colorElement.classList.remove("afternoon");
+  }
+
+  if (hours < 18) {
+    colorElement.classList.remove("evening");
+    colorElement.classList.add("afternoon");
   }
 
   return `Last updated: ${day} ${hours}:${minutes}`;
@@ -64,8 +68,9 @@ function displayForecast(response) {
         `
       <div class="col-2">
         <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <br />
        <img src="img/${forecastDay.weather[0].icon}.png" alt="${
-          forecastDay.weather[0].main
+          forecastDay.weather[0].description
         }" id="icon-forecast" width="30px"/>
         <div class="weather-forecast-temperatures">
           <span class="weather-forecast-max"> ${Math.round(
@@ -99,7 +104,7 @@ function showTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let currentDate = document.querySelector("#date");
 
-  let h2 = document.querySelector("h2");
+  let h2 = document.querySelector("#city-name");
   let cityName = response.data.name;
   h2.innerHTML = `${cityName}`.toLocaleUpperCase().trim();
 
@@ -120,29 +125,31 @@ function showTemperature(response) {
 
 //convertion
 
-//function convertFahrenheit(event) {
-// event.preventDefault();
-// celcius.classList.remove("active");
-//celcius.classList.add("passive");
-//fahrenheit.classList.add("active");
-//fahrenheit.classList.remove("passive");
-// let fahrenheitTemp = (celciusTemp * 9) / 5 + 32;
-// let temperatureElement = document.querySelector("#main-temp");
-// temperatureElement.innerHTML = Math.round(fahrenheitTemp);}
+function convertFahrenheit(event) {
+  event.preventDefault();
+  celcius.classList.remove("active");
+  celcius.classList.add("passive");
+  fahrenheit.classList.add("active");
+  fahrenheit.classList.remove("passive");
+  let fahrenheitTemp = (celciusTemp * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#main-temp");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+}
 
-//let fahrenheit = document.querySelector("#fahrenheit");
-//fahrenheit.addEventListener("click", convertFahrenheit);
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", convertFahrenheit);
 
-//let celciusTemp = null;
+let celciusTemp = null;
 
-//function convertCelcius(event) {
-// event.preventDefault();
-//celcius.classList.add("active");
-//celcius.classList.remove("passive");
-//fahrenheit.classList.remove("active");
-// fahrenheit.classList.add("passive");
-//let temperatureElement = document.querySelector("#main-temp");
-//temperatureElement.innerHTML = Math.round(celciusTemp);}
+function convertCelcius(event) {
+  event.preventDefault();
+  celcius.classList.add("active");
+  celcius.classList.remove("passive");
+  fahrenheit.classList.remove("active");
+  fahrenheit.classList.add("passive");
+  let temperatureElement = document.querySelector("#main-temp");
+  temperatureElement.innerHTML = Math.round(celciusTemp);
+}
 
-//let celcius = document.querySelector("#celcius");
-//celcius.addEventListener("click", convertCelcius);
+let celcius = document.querySelector("#celcius");
+celcius.addEventListener("click", convertCelcius);
