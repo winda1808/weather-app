@@ -120,31 +120,29 @@ function showTemperature(response) {
 
 //convertion
 
-function convertFahrenheit(event) {
-  event.preventDefault();
-  celcius.classList.remove("active");
-  celcius.classList.add("passive");
-  fahrenheit.classList.add("active");
-  fahrenheit.classList.remove("passive");
-  let fahrenheitTemp = (celciusTemp * 9) / 5 + 32;
-  let temperatureElement = document.querySelector("#main-temp");
-  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
-}
+//function convertFahrenheit(event) {
+// event.preventDefault();
+// celcius.classList.remove("active");
+//celcius.classList.add("passive");
+//fahrenheit.classList.add("active");
+//fahrenheit.classList.remove("passive");
+// let fahrenheitTemp = (celciusTemp * 9) / 5 + 32;
+// let temperatureElement = document.querySelector("#main-temp");
+// temperatureElement.innerHTML = Math.round(fahrenheitTemp);}
 
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", convertFahrenheit);
+//let fahrenheit = document.querySelector("#fahrenheit");
+//fahrenheit.addEventListener("click", convertFahrenheit);
 
-let celciusTemp = null;
+//let celciusTemp = null;
 
-function convertCelcius(event) {
-  event.preventDefault();
-  celcius.classList.add("active");
-  celcius.classList.remove("passive");
-  fahrenheit.classList.remove("active");
-  fahrenheit.classList.add("passive");
-  let temperatureElement = document.querySelector("#main-temp");
-  temperatureElement.innerHTML = Math.round(celciusTemp);
-}
+//function convertCelcius(event) {
+// event.preventDefault();
+//celcius.classList.add("active");
+//celcius.classList.remove("passive");
+//fahrenheit.classList.remove("active");
+// fahrenheit.classList.add("passive");
+//let temperatureElement = document.querySelector("#main-temp");
+//temperatureElement.innerHTML = Math.round(celciusTemp);}
 
-let celcius = document.querySelector("#celcius");
-celcius.addEventListener("click", convertCelcius);
+//let celcius = document.querySelector("#celcius");
+//celcius.addEventListener("click", convertCelcius);
