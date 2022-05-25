@@ -89,6 +89,11 @@ h3,
   left: 30%;
 }
 
+.icon-forecast {
+  margin: 10px;
+  margin-bottom: 5px;
+}
+
 .description {
   margin: 0 auto;
   text-align: center;

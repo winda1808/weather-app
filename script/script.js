@@ -33,18 +33,6 @@ function formatDate(timestamp) {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let day = days[date.getDay()];
 
-  let colorElement = document.querySelector("#bg-color");
-
-  if (hours >= 18) {
-    colorElement.classList.add("evening");
-    colorElement.classList.remove("afternoon");
-  }
-
-  if (hours < 18) {
-    colorElement.classList.remove("evening");
-    colorElement.classList.add("afternoon");
-  }
-
   return `Last updated: ${day} ${hours}:${minutes}`;
 }
 
@@ -68,10 +56,9 @@ function displayForecast(response) {
         `
       <div class="col-2">
         <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
-        <br />
        <img src="img/${forecastDay.weather[0].icon}.png" alt="${
           forecastDay.weather[0].description
-        }" id="icon-forecast" width="30px"/>
+        }" class="icon-forecast" id="icon-forecast" width="30px"/>
         <div class="weather-forecast-temperatures">
           <span class="weather-forecast-max"> ${Math.round(
             forecastDay.temp.max
