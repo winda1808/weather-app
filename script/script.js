@@ -56,7 +56,6 @@ function displayForecast(response) {
   let forecast = response.data.daily;
 
   let forecastElement = document.querySelector("#forecast-daily");
-
   let forecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
@@ -65,9 +64,9 @@ function displayForecast(response) {
         `
       <div class="col-2">
         <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
-        <br />
-       <img src="" id="icon-forecast" width="30px"/>
-        <br />
+       <img src="img/${forecastDay.weather[0].icon}.png" alt="${
+          forecastDay.weather[0].main
+        }" id="icon-forecast" width="30px"/>
         <div class="weather-forecast-temperatures">
           <span class="weather-forecast-max"> ${Math.round(
             forecastDay.temp.max
@@ -83,37 +82,6 @@ function displayForecast(response) {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-
-  let icon = document.querySelector("#icon-forecast");
-  let forecastIcon = forecastDay.weather[0].icon;
-  let forecastMain = forecastDay.weather[0].main;
-
-  if ((forecastIcon = "50d")) {
-    icon.setAttribute("src", `img/mist.png`);
-  }
-
-  if (forecastMain == "Clouds") {
-    icon.setAttribute("src", `img/cloudy.png`);
-  }
-  if (forecastMain == "Rain") {
-    icon.setAttribute("src", `img/rain.png`);
-  }
-
-  if (forecastMain == "Drizzle") {
-    icon.setAttribute("src", `img/rain.png`);
-  }
-
-  if (forecastMain == "Clear") {
-    icon.setAttribute("src", `img/sunny.png`);
-  }
-
-  if (forecastMain == "Thunderstorm") {
-    icon.setAttribute("src", `img/thunder.png`);
-  }
-
-  if (forecastMain == "Snow") {
-    icon.setAttribute("src", `img/snow.png`);
-  }
 }
 
 function getForecast(coordinates) {
@@ -136,7 +104,7 @@ function showTemperature(response) {
   h2.innerHTML = `${cityName}`.toLocaleUpperCase().trim();
 
   let h1 = document.querySelector("#main-temp");
-  let celciusTemp = response.data.main.temp;
+  celciusTemp = response.data.main.temp;
   h1.innerHTML = Math.round(celciusTemp);
   descriptionElement.innerHTML = response.data.weather[0].description;
   windSpeed.innerHTML = `Wind: ${wind} km/h`;
@@ -144,34 +112,8 @@ function showTemperature(response) {
   currentDate.innerHTML = formatDate(response.data.dt * 1000);
 
   let iconElement = document.querySelector("#weather-icon");
-
   let iconCode = response.data.weather[0].icon;
-  if ((iconCode = "50d")) {
-    iconElement.setAttribute("src", `img/mist.png`);
-  }
-
-  let weather = response.data.weather[0].main;
-
-  if (weather == "Clouds") {
-    iconElement.setAttribute("src", `img/cloudy.png`);
-  }
-  if (weather == "Rain") {
-    iconElement.setAttribute("src", `img/rain.png`);
-  }
-
-  if (weather == "Drizzle") {
-    iconElement.setAttribute("src", `img/rain.png`);
-  }
-
-  if (weather == "Clear") {
-    iconElement.setAttribute("src", `img/sunny.png`);
-  }
-  if (weather == "Thunderstorm") {
-    iconElement.setAttribute("src", `img/thunder.png`);
-  }
-  if (weather == "Snow") {
-    iconElement.setAttribute("src", `img/snow.png`);
-  }
+  iconElement.setAttribute("src", `img/${iconCode}.png`);
 
   getForecast(response.data.coord);
 }
