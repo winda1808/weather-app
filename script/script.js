@@ -30,15 +30,8 @@ function formatDate(timestamp) {
   }
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let day = days[date.getDay()];
-  return `Last updated: ${day} ${hours}:${minutes}`;
-}
 
-//check if hours 18
-
-function bgColor(event) {
-  event.preventDefault();
   let ColorElement = document.querySelector("#bg-color");
-  let hours = date.getHours();
   if (hours < 18) {
     ColorElement.classList.add("afternoon");
     ColorElement.classList.remove("evening");
@@ -47,31 +40,87 @@ function bgColor(event) {
     ColorElement.classList.add("evening");
     ColorElement.classList.remove("afternoon");
   }
-}
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
+  return `Last updated: ${day} ${hours}:${minutes}`;
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast-daily");
+
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col">
-          <div class="date">${day}</div>
-          <div>
-            <br />
-            <img src="img/rain.png" width="30px" />
-          </div>
-          <br />
-          <div>
-            <span class="weather-max"> 31° </span>
-            <span class="weather-min"> 25° </span>
-          </div>
-        </div>`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="col-2">
+        <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
+        <br />
+       <img src="" id="icon-forecast" width="30px"/>
+        <br />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-max"> ${Math.round(
+            forecastDay.temp.max
+          )}° </span>
+          <span class="weather-forecast-min"> ${Math.round(
+            forecastDay.temp.min
+          )}° </span>
+        </div>
+      </div>
+  `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+
+  let icon = document.querySelector("#icon-forecast");
+  let forecastIcon = forecastDay.weather[0].icon;
+  let forecastMain = forecastDay.weather[0].main;
+
+  if ((forecastIcon = "50d")) {
+    icon.setAttribute("src", `img/mist.png`);
+  }
+
+  if (forecastMain == "Clouds") {
+    icon.setAttribute("src", `img/cloudy.png`);
+  }
+  if (forecastMain == "Rain") {
+    icon.setAttribute("src", `img/rain.png`);
+  }
+
+  if (forecastMain == "Drizzle") {
+    icon.setAttribute("src", `img/rain.png`);
+  }
+
+  if (forecastMain == "Clear") {
+    icon.setAttribute("src", `img/sunny.png`);
+  }
+
+  if (forecastMain == "Thunderstorm") {
+    icon.setAttribute("src", `img/thunder.png`);
+  }
+
+  if (forecastMain == "Snow") {
+    icon.setAttribute("src", `img/snow.png`);
+  }
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "ae7a846b3048f734526a71e1a47e2b4b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function showTemperature(response) {
@@ -81,11 +130,13 @@ function showTemperature(response) {
   let humid = response.data.main.humidity;
   let humidityElement = document.querySelector("#humidity");
   let currentDate = document.querySelector("#date");
-  let h1 = document.querySelector("#main-temp");
+
   let h2 = document.querySelector("h2");
   let cityName = response.data.name;
   h2.innerHTML = `${cityName}`.toLocaleUpperCase().trim();
-  celciusTemp = response.data.main.temp;
+
+  let h1 = document.querySelector("#main-temp");
+  let celciusTemp = response.data.main.temp;
   h1.innerHTML = Math.round(celciusTemp);
   descriptionElement.innerHTML = response.data.weather[0].description;
   windSpeed.innerHTML = `Wind: ${wind} km/h`;
@@ -121,6 +172,8 @@ function showTemperature(response) {
   if (weather == "Snow") {
     iconElement.setAttribute("src", `img/snow.png`);
   }
+
+  getForecast(response.data.coord);
 }
 
 //convertion
@@ -153,5 +206,3 @@ function convertCelcius(event) {
 
 let celcius = document.querySelector("#celcius");
 celcius.addEventListener("click", convertCelcius);
-
-displayForecast();
