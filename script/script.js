@@ -85,6 +85,10 @@ function getForecast(coordinates) {
 
 function showTemperature(response) {
   let descriptionElement = document.querySelector("#description");
+  celcius.classList.add("active");
+  celcius.classList.remove("passive");
+  fahrenheit.classList.remove("active");
+  fahrenheit.classList.add("passive");
   let wind = Math.round(response.data.wind.speed);
   let windSpeed = document.querySelector("#wind");
   let humid = response.data.main.humidity;
@@ -125,7 +129,6 @@ function convertFahrenheit(event) {
 }
 
 function convertCelcius(event) {
-  event.preventDefault();
   celcius.classList.add("active");
   celcius.classList.remove("passive");
   fahrenheit.classList.remove("active");
@@ -138,5 +141,6 @@ let celciusTemp = null;
 
 let fahrenheit = document.querySelector("#fahrenheit");
 fahrenheit.addEventListener("click", convertFahrenheit);
+
 let celcius = document.querySelector("#celcius");
 celcius.addEventListener("click", convertCelcius);
