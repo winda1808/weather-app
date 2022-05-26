@@ -118,15 +118,11 @@ function convertFahrenheit(event) {
   celcius.classList.add("passive");
   fahrenheit.classList.add("active");
   fahrenheit.classList.remove("passive");
-  let fahrenheitTemp = (celciusTemp * 9) / 5 + 32;
+
   let temperatureElement = document.querySelector("#main-temp");
+  let fahrenheitTemp = (celciusTemp * 9) / 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemp);
 }
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", convertFahrenheit);
-
-let celciusTemp = null;
 
 function convertCelcius(event) {
   event.preventDefault();
@@ -138,5 +134,9 @@ function convertCelcius(event) {
   temperatureElement.innerHTML = Math.round(celciusTemp);
 }
 
+let celciusTemp = null;
+
+let fahrenheit = document.querySelector("#fahrenheit");
+fahrenheit.addEventListener("click", convertFahrenheit);
 let celcius = document.querySelector("#celcius");
 celcius.addEventListener("click", convertCelcius);
